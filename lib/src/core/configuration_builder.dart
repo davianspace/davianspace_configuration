@@ -25,6 +25,12 @@ import 'configuration_root.dart';
 /// print(config['app:name']);
 /// ```
 final class ConfigurationBuilder {
+  /// Creates a [ConfigurationBuilder] with no initial sources.
+  ///
+  /// Add sources via [add], [addInMemory], [addMap], [addJsonFile],
+  /// [addJsonString], or [addEnvironmentVariables], then call [build].
+  ConfigurationBuilder();
+
   final List<ConfigurationSource> _sources = [];
 
   /// The read-only list of sources added so far.

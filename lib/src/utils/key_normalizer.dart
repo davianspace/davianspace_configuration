@@ -12,7 +12,7 @@ final class KeyNormalizer {
 
   /// Returns [key] converted to lowercase.
   ///
-  /// All path segments separated by [ConfigurationPathSeparator] are
+  /// All path segments separated by [configurationPathSeparator] are
   /// individually normalized, so `"Database:Host"` and `"database:host"`
   /// are treated as the same key.
   static String normalize(String key) => key.toLowerCase();

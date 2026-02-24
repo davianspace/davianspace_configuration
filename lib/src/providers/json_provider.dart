@@ -118,7 +118,7 @@ final class JsonStringConfigurationSource implements ConfigurationSource {
 /// A [ConfigurationProvider] that reads configuration from a JSON file.
 ///
 /// When [optional] is `true` a missing file is silently ignored rather than
-/// throwing a [FileSystemException].  When [reloadOnChange] is `true` the
+/// throwing a `FileSystemException`.  When [reloadOnChange] is `true` the
 /// provider subscribes to file-system events and reloads automatically.
 ///
 /// > **Platform note**: requires a native Dart / Flutter platform.

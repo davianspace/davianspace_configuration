@@ -36,6 +36,13 @@ import 'configuration_root.dart';
 /// final dark = manager['feature:darkMode']; // 'true'
 /// ```
 final class ConfigurationManager implements Configuration {
+  /// Creates a [ConfigurationManager] with no initial providers.
+  ///
+  /// Add providers immediately via the fluent [add], [addInMemory], [addMap],
+  /// [addJsonFile], [addJsonString], or [addEnvironmentVariables] methods.
+  /// Each call takes effect immediately — no separate `build()` call is needed.
+  ConfigurationManager();
+
   final List<ConfigurationProvider> _providers = [];
   late ConfigurationRoot _root = ConfigurationRoot(_providers);
 
