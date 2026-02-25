@@ -29,7 +29,7 @@ Compose configuration from multiple sources (JSON files, environment variables, 
 
 ```yaml
 dependencies:
-  davianspace_configuration: ^1.0.0
+  davianspace_configuration: ^1.0.3
 ```
 
 ---
@@ -194,6 +194,65 @@ print(manager['feature:exportCsv']); // true
 
 // Snapshot the current state as a static ConfigurationRoot.
 final snapshot = manager.buildSnapshot();
+```
+
+---
+
+## DI container integration (`davianspace_dependencyinjection`)
+
+When used with
+[`davianspace_dependencyinjection`](https://pub.dev/packages/davianspace_dependencyinjection),
+`Configuration` becomes a first-class injectable singleton via extension methods
+on `ServiceCollection`.
+
+```yaml
+# pubspec.yaml
+dependencies:
+  davianspace_configuration: ^1.0.3
+  davianspace_dependencyinjection: ^1.0.3
+```
+
+```dart
+import 'package:davianspace_configuration/davianspace_configuration.dart';
+import 'package:davianspace_dependencyinjection/davianspace_dependencyinjection.dart';
+
+// Option A — register a pre-built configuration root.
+final config = ConfigurationBuilder()
+    .addJsonFile('appsettings.json')
+    .addEnvironmentVariables(prefix: 'APP_')
+    .build();
+
+final provider = ServiceCollection()
+  ..addConfiguration(config)   // registers Configuration + ConfigurationRoot
+  .buildServiceProvider();
+
+final cfg = provider.getRequired<Configuration>();
+print(cfg['database:host']);
+
+// Option B — let the container build the configuration lazily.
+final provider2 = ServiceCollection()
+  ..addConfigurationBuilder((builder) {
+    builder
+      .addJsonFile('appsettings.json')
+      .addEnvironmentVariables(prefix: 'APP_');
+  })
+  .buildServiceProvider();
+```
+
+Bind options directly from the injected configuration:
+
+```dart
+final provider = ServiceCollection()
+  ..addConfiguration(config)
+  ..configure<DatabaseOptions>(
+    factory: DatabaseOptions.new,
+    configure: (opts) {
+      final s = config.getSection('Database');
+      opts.host = s['Host'] ?? 'localhost';
+      opts.port = int.parse(s['Port'] ?? '5432');
+    },
+  )
+  .buildServiceProvider();
 ```
 
 ---

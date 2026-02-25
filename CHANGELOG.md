@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.0.3] — 2026-02-25
+
+### Added
+
+- **`davianspace_dependencyinjection` integration** — `Configuration`,
+  `ConfigurationRoot`, and a fluent `ConfigurationBuilder` setup are now
+  injectable singletons via the new `addConfiguration()` and
+  `addConfigurationBuilder()` extension methods on `ServiceCollection`
+  (shipped as part of `davianspace_dependencyinjection ^1.0.3`). No changes to
+  this package's public API are required; consumers import both packages and
+  use the extensions from the DI package.
+
+---
+
 ## [1.0.0] — 2025-07-19
 
 ### Added

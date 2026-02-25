@@ -1,6 +1,6 @@
 name: davianspace_configuration
 description: Flexible configuration system for Dart and Flutter with multi-source providers, hierarchical settings, environment overrides, JSON support, and runtime reload.
-version: 1.0.0
+version: 1.0.3
 homepage: https://github.com/davianspace/davianspace_configuration
 repository: https://github.com/davianspace/davianspace_configuration
 issue_tracker: https://github.com/davianspace/davianspace_configuration/issues
